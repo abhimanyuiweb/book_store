@@ -1,8 +1,60 @@
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose');
+const aws = require('aws-sdk');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+var nodemailer = require('nodemailer');
+
+console.log('Testing.....');
+
+// var dynamodb = new aws.DynamoDB({
+//     region: "us-east-1",
+//     apiVersion: "2012-08-10"
+//   });
+  
+// dynamodb.scan({
+//     TableName: "fruits"
+// }, function (err, data) {
+//   if (err) {
+//     console.log(err, err.stack); // an error occurred
+//   }
+//   else {
+//     let items = data.Items.map(item => {
+//         return {
+//             name: item.name.S,
+//             quantity: item.quantity.S
+//         };
+//     });
+//     console.log(items);           // successful response
+//   }
+// });
+
+
+// aws.config.getCredentials(function(err) {
+//     if (err) console.log(err.stack);
+//     // credentials not loaded
+//     else {
+//     //   console.log("Access key:", aws.config.credentials.secretAccessKey);
+//     }
+//   });
+
+
+// var transporter = nodemailer.createTransport({
+//     host: 'smtp.ethereal.email',
+//     port: 587,
+//     auth: {
+//         user: 'leon.schmitt98@ethereal.email',
+//         pass: 'gEv7NQtGyAEy91H723'
+//     }
+// });
+
+// var mailOptions = {
+//     from: 'jk@gmail.com',
+//     to: 'abhimanyuiweb@gmail.com',
+//     subject: 'Sending Email using Node.js',
+//     text: 'That was easy!'
+//   };
 
 const config = require("./config/config");
 const responses = require("./helpers/response");
@@ -25,10 +77,22 @@ mongoose.connection
 })
 
 app.get('/', function (req, res) {
+    // while(true) {
+        
+    // }
   res.send('Book store')
 })
 
 app.get('/books', (req, res) => {
+
+
+    // transporter.sendMail(mailOptions, function(error, info){
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log('Email sent: ' + info.response);
+    //     }
+    //   });
     Book.find({}).then((books)=>{
         if(books.length > 0){
             return  responses.successResponseWithData(res, "Books found", books);
