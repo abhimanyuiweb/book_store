@@ -21,13 +21,17 @@ app.get('/books', (req, res) => {
 });
 
 app.post('/books', (req, res) => {
-    
+    res.json({
+        message: 'This is books POST endpoint'
+    });
 });
 
 // A service to create user for testing without authentocation. Its not a good practive.
 // I am using for creating dummy users.
 app.post('/user', (req, res) => {
-    
+    res.json({
+        message: 'This is user POST endpoint'
+    });
 });
 
 // app.post('/authentication', (req, res) => {
@@ -60,8 +64,8 @@ app.post('/user', (req, res) => {
 //     });
 // });
 
-app.listen(3000, () => {
-    console.log(`Expres server listening on: 3000`);
+app.listen(4000, () => {
+    console.log(`Expres server listening on: 4000`);
 });
 
 
